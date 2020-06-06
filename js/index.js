@@ -3,7 +3,7 @@ const markers = [];
 let infoWindow;
 
 function initMap() {
-    let losAngeles = {
+    const losAngeles = {
         lat: 34.063380, lng: -118.358080
     }
 
@@ -19,7 +19,6 @@ function initMap() {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']
           }
 
-
         });
         infoWindow = new google.maps.InfoWindow();
         searchStores();
@@ -30,11 +29,11 @@ function initMap() {
 
 const searchStores = () => {
     let foundStores = [];
-    let zipCode = document.getElementById('zip-code-input').value;
+    const zipCode = document.getElementById('zip-code-input').value;
 
     if(zipCode) {
         stores.forEach((store) => {
-            let postal = store.address.postalCode.substring(0,5);
+            const postal = store.address.postalCode.substring(0,5);
             if(postal === zipCode) {
                 foundStores.push(store);
             }
@@ -50,14 +49,14 @@ const searchStores = () => {
 
 const clearLocations = () => {
     infoWindow.close();
-    for (var i = 0; i < markers.length; i++) {
+    for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
     markers.length = 0;
 }
 
 const setOnClickListener = () => {
-    let storeElements = document.querySelectorAll('.store-container');
+    const storeElements = document.querySelectorAll('.store-container');
 
     storeElements.forEach((element, i) => {
         element.addEventListener('click', function() {
@@ -69,8 +68,8 @@ const setOnClickListener = () => {
 const displayStores = (stores) => {
     let storesHtml = '';
     stores.forEach((store, i) => {
-        let address = store.addressLines;
-        let phone = store.phoneNumber;
+        const address = store.addressLines;
+        const phone = store.phoneNumber;
 
         storesHtml += `
         <div class="store-container">
@@ -97,17 +96,17 @@ const displayStores = (stores) => {
 }
 
 const showStoresMarkers = (stores) => {
-    let bounds = new google.maps.LatLngBounds();
+    const bounds = new google.maps.LatLngBounds();
 
     stores.forEach((store, i) => {
-        let latlng = new google.maps.LatLng(
+        const latlng = new google.maps.LatLng(
             store.coordinates.latitude,
             store.coordinates.longitude);
 
-        let name = store.name;
-        let address= store.addressLines[0];
-        let statusText = store.openStatusText;
-        let phone = store.phoneNumber;
+        const name = store.name;
+        const address= store.addressLines[0];
+        const statusText = store.openStatusText;
+        const phone = store.phoneNumber;
 
         bounds.extend(latlng);
         createMarker(latlng, name, address, statusText, phone, i);
@@ -140,7 +139,7 @@ const createMarker = (latlng, name, address, statusText, phone, i) => {
 
     `;
 
-    let marker = new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: map,
       position: latlng,
       label: `${i+1}`
