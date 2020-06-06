@@ -1,4 +1,3 @@
-
 let map;
 let markers = [];
 let infoWindow;
@@ -10,7 +9,87 @@ function initMap() {
 
         map = new google.maps.Map(document.getElementById('map'), {
         center: losAngeles,
-        zoom: 8
+        zoom: 8,
+        styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
         });
         infoWindow = new google.maps.InfoWindow();
         searchStores();
@@ -25,7 +104,7 @@ const searchStores = () => {
             let postal = store.address.postalCode.substring(0,5);
             if(postal === zipCode) {
                 foundStores.push(store);
-            } 
+            }
         });
     } else {
         foundStores = stores;
@@ -91,12 +170,12 @@ const showStoresMarkers = (stores) => {
         let latlng = new google.maps.LatLng(
             store.coordinates.latitude,
             store.coordinates.longitude);
-        
+
         let name = store.name;
         let address= store.addressLines[0];
         let statusText = store.openStatusText;
         let phone = store.phoneNumber;
-        
+
         bounds.extend(latlng);
         createMarker(latlng, name, address, statusText, phone, i);
     });
@@ -111,21 +190,21 @@ const createMarker = (latlng, name, address, statusText, phone, i) => {
             </div>
             <div class="store-info-status">
                 ${statusText}
-            </div>            
+            </div>
             <div class="store-info-address">
                     <div class="circle">
                     <i class="fas fa-location-arrow"></i>
                     </div>
                 ${address}
-            </div>            
+            </div>
                 <div class="store-info-phone">
-                    <div class="circle">   
+                    <div class="circle">
                     <i class="fas fa-phone-alt"></i>
                     </div>
                 ${phone}
-            </div>            
+            </div>
         </div>
-    
+
     `;
 
     let marker = new google.maps.Marker({
