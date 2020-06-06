@@ -1,11 +1,12 @@
 let map;
-let markers = [];
+const markers = [];
 let infoWindow;
 
 function initMap() {
     let losAngeles = {
         lat: 34.063380, lng: -118.358080
     }
+
     const styledMapType = new google.maps.StyledMapType(
         theme,
         {name: 'Styled Map'});
@@ -17,13 +18,15 @@ function initMap() {
         mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']
           }
+
+
         });
         infoWindow = new google.maps.InfoWindow();
         searchStores();
 
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
-}
+    }
 
 const searchStores = () => {
     let foundStores = [];

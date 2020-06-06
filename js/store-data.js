@@ -1,4 +1,4 @@
-let stores = [{
+const stores = [{
     "recommendation": {},
     "storeNumber": "5758-13907",
     "id": "15051",
